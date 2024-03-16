@@ -1,0 +1,66 @@
+{% include 'main.html' %}
+{% block content %}
+{% endblock %}
+<section>
+    <h1>Orders</h1>
+    <br>
+    <br>
+    {% if messages %}
+    <ul class="messages">
+        {% for i in messages %}
+        <div class="alert alert-success alert-dismissable d-flex justify-content-between">        
+        {{ i }}
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if buy %}
+    {% for i in buy %}
+    {% if i.conformation == 0 %}
+    <div class="card mb-1 g-4" style="max-width: 100%; height:  80vh; padding: 5%; border: none;">
+        <div class="row g-4">
+            <div class="col-md-4 col-sm-12" style="padding-right: 5%;">
+                <img src="{{ i.image.url }}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div class="card-body">
+                    <form  action="{% url 'orders' i.id %}" method="POST">
+                        {% csrf_token %}
+                        <h5 class="card-title">{{ i.name }}</h5>
+                        <h6 class="card-text" style="color:goldenrod;">Price: ₹ {{ i.price}}</h6>
+                        <p class="card-text">{{ i.detail }}</p>
+                        <p class="card-text" style="color:darkblue;">Selected Quantity: {{ i.quantity }}</p>
+                        <p class="card-text" style="color:green;">Total price: {{ i.totalprice}}</p>
+                        <br>
+                        <button class="btn btn-primary" value="conformation" name="but">Conformation Order</button>
+                    </form>
+                    <a class="btn btn-danger" href="{% url 'remove' i.id %}">Remove cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="card mb-1 g-4" style="max-width: 100%; height:  80vh; padding: 5%; border: none;">
+        <div class="row g-4">
+            <div class="col-md-4 col-sm-12" style="padding-right: 5%;">
+                <img src="{{ i.image.url }}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div class="card-body">
+                    <form  action="{% url 'orders' i.id %}" method="POST">
+                        {% csrf_token %}
+                        <h5 class="card-title">{{ i.name }}</h5>
+                        <h3 class="card-text" style="color:green;"> Your Product Will Be Delivey on {{ i.delivery }}</h3>
+                    </form>
+                    <a class="btn btn-danger" href="{% url 'cancelorder' i.id %}">Cancel Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+        {% else %}
+        <center><h3 style="color: red;">Your Order is Empty</h3></center>
+        {% endif %}
+</section>

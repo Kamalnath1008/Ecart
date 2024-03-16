@@ -1,0 +1,113 @@
+{% include 'main.html' %}
+{% block content %}
+{% endblock %}
+
+<section>
+  {% if messages %}
+  <ul class="messages">
+    {% for i in messages %}
+    <div class="alert alert-success alert-dismissable d-flex justify-content-between">        
+      {{ i }}
+      <button class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <br>
+  <br>
+  <center><h1>{{ pform.name }} Description:</h1></center>
+  <br>
+  <br>
+    
+  <div class="card mb-1 g-4" style="max-width: 100%; height:  80vh; padding: 5%; border: none;">
+    <div class="row g-4">
+      <div class="col-md-4 col-sm-12" style="padding-right: 5%;">
+        <img src="{{ pform.image.url }}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8 col-sm-12">
+        <div class="card-body">
+          <h5 class="card-title">{{ pform.name }}</h5>
+          <h6 class="card-text" style="color: green;">Price: ₹ {{ pform.price}}</h6>
+          <p class="card-text">{{ pform.detail }}</p>
+          {% if pform.quantity > 0 %}
+          <p class="card-text" style="color:goldenrod;">Available Quantity:{{ pform.quantity}}</p>
+          <form action="{% url 'order' pform.id %}" method="POST">
+            {% csrf_token %}
+            <p class="card-text">Select Quantity:</p>
+            <button class="btn btn-sucess" id="minusvalue"><a class="btn  btn-success" href="#" style="text-decoration: none;">-</a></button>
+            <input type="number" name="buyvalue" value="1" id="selquantity" style="text-align: center;">
+            <button class="btn btn-sucess" id="plusvalue"><a class="btn  btn-success" href="#" style="text-decoration: none;">+</a></button>
+            <br>
+            <br>
+            <button class="btn btn-primary">Buy Now</button>
+          </form>
+          <form action="{% url 'cart' pform.id %}" method="POST">
+            {% csrf_token %}
+            <p class="card-text">Select Quantity:</p>
+            <button class="btn btn-sucess" id="minus1"><a class="btn  btn-success" href="#" style="text-decoration: none;">-</a></button>
+            <input type="number" name="cartvalue" value="1" id="sequantity" style="text-align: center;">
+            <button class="btn btn-sucess" id="plus1"><a class="btn  btn-success" href="#" style="text-decoration: none;">+</a></button>
+            <br>
+            <br>
+            <button class="btn btn-primary" type="submit" >Add cart</button>
+          </form>
+            <p class="card-text">
+              <div class="stars">Ratings:
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+              </div>
+            </p>
+          
+          {% else %}
+          <p class="card-text" style="color: red;">Out of stock</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let minus=document.getElementById('minusvalue')
+  let plus=document.getElementById('plusvalue')
+  let selquantity=document.getElementById('selquantity')
+  plus.addEventListener("click",()=>{
+    let a = parseInt(selquantity.value)
+    a=isNaN(a)?1:a;
+    if(a<10){
+      a++;
+    selquantity.value=a
+    }
+  })
+  minus.addEventListener("click",()=>{
+    let a = parseInt(selquantity.value)
+    a=isNaN(a)?1:a;
+    if(a>1){
+      a--;
+    selquantity.value=a
+    }
+  })
+
+  let minus1=document.getElementById('minus1')
+  let plus1=document.getElementById('plus1')
+  let sequantity=document.getElementById('sequantity')
+  plus1.addEventListener("click",()=>{
+    let a = parseInt(sequantity.value)
+    a=isNaN(a)?1:a;
+    if(a<10){
+      a++;
+    sequantity.value=a
+    }
+  })
+  minus1.addEventListener("click",()=>{
+    let a = parseInt(sequantity.value)
+    a=isNaN(a)?1:a;
+    if(a>1){
+      a--;
+    sequantity.value=a
+    }
+  })
+</script>

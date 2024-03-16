@@ -1,0 +1,33 @@
+{% include 'main.html' %}
+{% block content %}
+{% endblock %}
+
+<section class="product" id="product">
+    <center><h3>Our Products</h3></center>
+    <center><h1>New Arraival's</h1></center>
+    <br>
+    <br>
+     <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for i in form %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ i.image.url }}" class="card-img-top" alt=".." width="300px" height="300px">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">{{ i.name }}</h5>
+                    <p class="card-text" >
+                        <div class="stars" style="text-align: center;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </p>
+                    <span style="text-align: left; color: green; font-weight:bold; padding-right: 150px; font-size: 30px;">₹{{ i.price }}</span>
+                    <a href="{% url 'viewproduct' i.id %}" class="btn btn-primary">View product</a>
+                </div>
+            </div>
+        </div> 
+        {% endfor %}
+    </div>
+</section>
