@@ -2,7 +2,7 @@
 Django
 gunicorn
 packaging==24.0
-pillow==10.2.0
+pillow
 PyMySQL
 sqlparse==0.4.4
 tzdata==2023.4
