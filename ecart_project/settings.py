@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import pymysql
+# import pymysql
 
-pymysql.install_as_MySQLdb()
+# pymysql.install_as_MySQLdb()
 
 import os
 
@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-$t(pt35-cg5+3f^1&1n!8#2h2h%mrsgy13kx+4ipsb%a7o9gpd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,14 +81,14 @@ WSGI_APPLICATION = 'ecart_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ecart',
-        'HOST': 'localhost',
-        'PASSWORD':'',
-        'USER':'root',
-        'PORT':'3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'ecart',
+        # 'HOST': 'localhost',
+        # 'PASSWORD':'',
+        # 'USER':'root',
+        # 'PORT':'3306'
     }
 }
 
