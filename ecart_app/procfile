@@ -1,1 +1,1 @@
-web: gunicon ecart.wsgi
+web: gunicorn ecart.wsgi
