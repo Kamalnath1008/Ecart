@@ -28,7 +28,7 @@ def Signin(request):
             request.session['Email']=user1.Email
             return redirect('/home')
         else:
-            return render(request,"signin.html",{'error': 'Invalid username or password'})
+            return redirect('/register')
     else:
         form=registerForm()
         return render(request,"signin.html",{'form':form})
