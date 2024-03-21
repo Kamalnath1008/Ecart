@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 web: gunicorn ecart_project.wsgi
+=======
+web: gunicorn ecart_app.wsgi
+>>>>>>> origin/main
